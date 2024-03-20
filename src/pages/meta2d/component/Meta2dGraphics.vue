@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import equipImage from '~/images/drag/equip.png'
+import equipImage2 from '~/images/drag/gaoyagang.svg'
 
 const graphicGroups = [
   {
@@ -202,7 +203,7 @@ const graphicGroups = [
     show: true,
     list: [
       {
-        name: '高压缸1',
+        name: '设备1',
         image: 'https://q2.itc.cn/q_70/images03/20240316/2bb8245662024022ad876511c84a1003.jpeg',
         icon: '',
         id: 1001,
@@ -213,18 +214,30 @@ const graphicGroups = [
           name: 'image',
         },
       },
-      // {
-      //   name: '高压缸2',
-      //   image: 'http://103.228.204.22:8082/zt/static/images/components/%E9%AB%98%E5%8E%8B%E7%BC%B81.svg',
-      //   icon: '',
-      //   id: 1002,
-      //   data: {
-      //     width: 120,
-      //     height: 80,
-      //     image: decodeURI('http://103.228.204.22:8082/zt/static/images/components/%E9%AB%98%E5%8E%8B%E7%BC%B81.svg'),
-      //     name: 'image',
-      //   },
-      // },
+      {
+        name: '设备2',
+        image: equipImage,
+        icon: '',
+        id: 1002,
+        data: {
+          width: 120,
+          height: 80,
+          image: equipImage,
+          name: 'image',
+        },
+      },
+      {
+        name: '高压缸1',
+        image: equipImage2,
+        icon: '',
+        id: 1003,
+        data: {
+          width: 120,
+          height: 80,
+          image: equipImage2,
+          name: 'image',
+        },
+      },
     ],
   },
   {
@@ -747,7 +760,7 @@ function dragStart(e: any, elem: any) {
         <div grid="~ cols-2 gap-5" w-full>
           <div
             v-for="elem in item.list" :key="elem.name"
-            col-span-1 flex="~ col" border="1 base" rounded hover:bg="gray/10" py-10px
+            flex="~ col" border="1 base" hover:bg="gray/10" col-span-1 rounded px-6px py-10px
             :draggable="true"
             @dragstart="dragStart($event, elem)"
             @click.prevent="dragStart($event, elem)"

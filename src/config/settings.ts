@@ -27,7 +27,7 @@ export const defaultSettings: Settings = {
    *  'vertical-mix' - 左侧菜单混合模式
    *  'horizontal-mix' - 顶部菜单混合模式
    */
-  layout: 'vertical',
+  layout: 'horizontal',
   showLogo: true,
   showTabs: true,
   showFoot: true,

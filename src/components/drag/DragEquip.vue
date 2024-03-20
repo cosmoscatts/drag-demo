@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import equipImage from '~/images/drag/equip.jpg'
+import equipImage from '~/images/drag/equip.png'
 </script>
 
 <template>

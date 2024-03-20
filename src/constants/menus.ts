@@ -37,4 +37,10 @@ export const MENUS: Menu[] = [
     icon: 'componentManage',
     path: '/component-manage',
   },
+  {
+    id: 104,
+    title: '组态管理2',
+    icon: 'meta2d',
+    path: '/meta2d',
+  },
 ]

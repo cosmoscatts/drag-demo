@@ -16,3 +16,5 @@ declare module '*.vue' {
 declare module '@arco-design/color'
 
 declare module 'vue-draggable-resizable'
+
+declare module '~icons/*'

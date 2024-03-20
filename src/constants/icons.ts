@@ -17,4 +17,5 @@ export const MENU_ICON_MAP: { [key: string]: Component } = {
   file: IconFile,
   profile: IconUserProfile,
   componentManage: IconApplication,
+  meta2d: IconApplication,
 }

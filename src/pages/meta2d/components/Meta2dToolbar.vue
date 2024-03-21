@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const isViewMounted = inject('isViewMounted') as Ref<boolean>
 
+const refShowProps = ref()
+
 const disableScale = ref(true)
 function updateDisableScale() {
   if (!isViewMounted.value) {
@@ -67,8 +69,15 @@ function scaleWindow() {
 
 const { selections } = useMeta2dSelection()
 function checkoutFileProps() {
+  refShowProps.value?.justShowProps?.()
   selections.mode = SelectionMode.File
   selections.pen = undefined
+}
+
+function save() {
+  Message.success('图纸数据已保存成功')
+  const data = meta2d.data()
+  localStorage.setItem('meta2d', JSON.stringify(data))
 }
 
 defineExpose({
@@ -146,14 +155,14 @@ defineExpose({
         设置
       </div>
 
-      <Meta2dShowProps :="$attrs" />
+      <Meta2dShowProps ref="refShowProps" :="$attrs" />
 
       <a-divider direction="vertical" />
 
       <div cursor-pointer hover:text-primary @click="clear">
         清空图纸
       </div>
-      <div>
+      <div cursor-pointer hover:text-primary @click="save">
         保存
       </div>
     </div>

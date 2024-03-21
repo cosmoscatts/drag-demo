@@ -1,104 +1,30 @@
 <script setup lang="ts">
 import type { Pen } from '@meta2d/core'
-import {
-  Meta2d,
-  register,
-  registerAnchors,
-  registerCanvasDraw,
-} from '@meta2d/core'
-import { flowAnchors, flowPens } from '@meta2d/flow-diagram'
-import {
-  activityDiagram,
-  activityDiagramByCtx,
-} from '@meta2d/activity-diagram'
-import { classPens } from '@meta2d/class-diagram'
-import { sequencePens, sequencePensbyCtx } from '@meta2d/sequence-diagram'
-import { register as registerEcharts } from '@meta2d/chart-diagram'
-import { formPens } from '@meta2d/form-diagram'
-import { chartsPens } from '@meta2d/le5le-charts'
-import { ftaAnchors, ftaPens, ftaPensbyCtx } from '@meta2d/fta-diagram'
-
+import { Meta2d } from '@meta2d/core'
 import Meta2dGraphics from './components/Meta2dGraphics.vue'
 import Meta2dToolbar from './components/Meta2dToolbar.vue'
-
 import { LAYOUT_PARAMS as params } from '~/constants'
-import equipImage2 from '~/images/drag/gaoyagang.svg'
 
 const refToolbar = ref()
 const showProps = ref(true)
 
 const { select } = useMeta2dSelection()
 
-watch(isDark, () => {
-  meta2d.setGrid({
-    gridColor: defaultMeta2dGridColor.value,
-  })
-  Object.values(meta2d.store.pens).forEach((pen) => {
-    meta2d.setValue({
-      id: pen.id,
-      color: isDark.value ? '#F6F6F6' : '#1D2129',
-    })
-  })
-  meta2d.render()
-})
+watch(isDark, changeMeta2dColor)
 
 onMounted(() => {
   // 创建实例
   // eslint-disable-next-line no-new
   new Meta2d('meta2d', defaultMeta2dOptions)
 
-  // 按需注册图形库
-  // 以下为自带基础图形库
-  register(flowPens())
-  registerAnchors(flowAnchors())
-  register(activityDiagram())
-  registerCanvasDraw(activityDiagramByCtx())
-  register(classPens())
-  register(sequencePens())
-  registerCanvasDraw(sequencePensbyCtx())
-  registerEcharts()
-  registerCanvasDraw(formPens())
-  registerCanvasDraw(chartsPens())
-  register(ftaPens())
-  registerCanvasDraw(ftaPensbyCtx())
-  registerAnchors(ftaAnchors())
+  // 注册图形库
+  registerMeta2dPlugins()
 
-  // 注册其他自定义图形库
-  // ...
+  // 从缓存加载数据
+  loadMeta2dData()
 
-  // 读取本地存储
-  let data: any = localStorage.getItem('meta2d')
-  if (data) {
-    data = JSON.parse(data)
-
-    // 判断是否为运行查看，是-设置为预览模式
-    if (location.pathname === '/preview') {
-      data.locked = 1
-    } else {
-      data.locked = 0
-    }
-    meta2d.open(data)
-  }
-
-  const pens = [
-    {
-      name: 'rectangle',
-      text: '矩形',
-      x: 100,
-      y: 100,
-      width: 100,
-      height: 100,
-    },
-    {
-      width: 120,
-      height: 80,
-      x: 400,
-      y: 100,
-      image: equipImage2,
-      name: 'image',
-    },
-  ]
-  meta2d.addPens(pens)
+  // 适配暗色风格颜色
+  changeMeta2dColor()
 
   meta2d.on('active', active)
   meta2d.on('inactive', inactive)

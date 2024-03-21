@@ -36,6 +36,7 @@ declare global {
   const breakpoints: typeof import('./composables/screen')['breakpoints']
   const capitalize: typeof import('./composables/common/string')['capitalize']
   const ceil: typeof import('./composables/common/number')['ceil']
+  const changeMeta2dColor: typeof import('./composables/meta2d/color-mode')['changeMeta2dColor']
   const checkImageBeforeUpload: typeof import('./composables/file')['checkImageBeforeUpload']
   const clone: typeof import('./composables/common/object')['clone']
   const computed: typeof import('vue')['computed']
@@ -137,6 +138,7 @@ declare global {
   const isString: typeof import('./composables/common/is')['isString']
   const isTruthy: typeof import('./composables/common/is')['isTruthy']
   const isUndefined: typeof import('./composables/common/is')['isUndefined']
+  const loadMeta2dData: typeof import('./composables/meta2d/load-data')['loadMeta2dData']
   const lodash: typeof import('./composables/common/plugins')['lodash']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const makeNonNullStr: typeof import('./composables/common/string')['makeNonNullStr']
@@ -462,6 +464,7 @@ declare module 'vue' {
     readonly breakpoints: UnwrapRef<typeof import('./composables/screen')['breakpoints']>
     readonly capitalize: UnwrapRef<typeof import('./composables/common/string')['capitalize']>
     readonly ceil: UnwrapRef<typeof import('./composables/common/number')['ceil']>
+    readonly changeMeta2dColor: UnwrapRef<typeof import('./composables/meta2d/color-mode')['changeMeta2dColor']>
     readonly checkImageBeforeUpload: UnwrapRef<typeof import('./composables/file')['checkImageBeforeUpload']>
     readonly clone: UnwrapRef<typeof import('./composables/common/object')['clone']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -556,6 +559,7 @@ declare module 'vue' {
     readonly isString: UnwrapRef<typeof import('./composables/common/is')['isString']>
     readonly isTruthy: UnwrapRef<typeof import('./composables/common/is')['isTruthy']>
     readonly isUndefined: UnwrapRef<typeof import('./composables/common/is')['isUndefined']>
+    readonly loadMeta2dData: UnwrapRef<typeof import('./composables/meta2d/load-data')['loadMeta2dData']>
     readonly lodash: UnwrapRef<typeof import('./composables/common/plugins')['lodash']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
@@ -871,6 +875,7 @@ declare module '@vue/runtime-core' {
     readonly breakpoints: UnwrapRef<typeof import('./composables/screen')['breakpoints']>
     readonly capitalize: UnwrapRef<typeof import('./composables/common/string')['capitalize']>
     readonly ceil: UnwrapRef<typeof import('./composables/common/number')['ceil']>
+    readonly changeMeta2dColor: UnwrapRef<typeof import('./composables/meta2d/color-mode')['changeMeta2dColor']>
     readonly checkImageBeforeUpload: UnwrapRef<typeof import('./composables/file')['checkImageBeforeUpload']>
     readonly clone: UnwrapRef<typeof import('./composables/common/object')['clone']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -965,6 +970,7 @@ declare module '@vue/runtime-core' {
     readonly isString: UnwrapRef<typeof import('./composables/common/is')['isString']>
     readonly isTruthy: UnwrapRef<typeof import('./composables/common/is')['isTruthy']>
     readonly isUndefined: UnwrapRef<typeof import('./composables/common/is')['isUndefined']>
+    readonly loadMeta2dData: UnwrapRef<typeof import('./composables/meta2d/load-data')['loadMeta2dData']>
     readonly lodash: UnwrapRef<typeof import('./composables/common/plugins')['lodash']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>

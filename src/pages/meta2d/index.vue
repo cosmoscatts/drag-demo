@@ -19,11 +19,14 @@ import { chartsPens } from '@meta2d/le5le-charts'
 import { ftaAnchors, ftaPens, ftaPensbyCtx } from '@meta2d/fta-diagram'
 
 import { useSelection } from './selection'
-import Meta2dGraphics from './component/Meta2dGraphics.vue'
-import Meta2dProps from './component/Meta2dProps.vue'
+import Meta2dGraphics from './components/Meta2dGraphics.vue'
+import Meta2dProps from './components/Meta2dProps.vue'
+import Meta2dToolbar from './components/Meta2dToolbar.vue'
 
 import { LAYOUT_PARAMS as params } from '~/constants'
 import equipImage2 from '~/images/drag/gaoyagang.svg'
+
+const showProps = ref(true)
 
 const { select } = useSelection()
 
@@ -126,16 +129,26 @@ onUnmounted(() => {
 const contentHeight = computed(() => {
   return `calc(100vh - ${getLayoutContentHeight().value + params.contentPadding * 2 + params.footHeight}px)`
 })
+
+const refEl = ref()
+const { width, height } = useElementSize(refEl)
+
+watch([width, height], ([w, h]) => {
+  meta2d.resize(w, h)
+})
 </script>
 
 <template>
-  <div grid="~ cols-7" border="1 base" :style="{ height: contentHeight }">
-    <div col-span-1 border="r-1 base" :style="{ height: contentHeight }" of-y-auto>
-      <Meta2dGraphics />
-    </div>
-    <div id="meta2d" col-span-5 :style="{ height: contentHeight }" />
-    <div col-span-1 border="l-1 base" :style="{ height: contentHeight }" of-y-auto>
-      <Meta2dProps />
+  <div>
+    <Meta2dToolbar v-model="showProps" />
+    <div grid="~ cols-7" border="1 base" :style="{ height: contentHeight }">
+      <div col-span-1 border="r-1 base" :style="{ height: contentHeight }" of-y-auto>
+        <Meta2dGraphics />
+      </div>
+      <div id="meta2d" ref="refEl" :style="{ height: contentHeight, width: '100%' }" :class="showProps ? 'col-span-5' : 'col-span-6'" />
+      <div v-show="showProps" col-span-1 border="l-1 base" :style="{ height: contentHeight }" of-y-auto>
+        <Meta2dProps />
+      </div>
     </div>
   </div>
 </template>

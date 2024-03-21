@@ -755,7 +755,7 @@ function dragStart(e: any, elem: any) {
 
 <template>
   <div h-full w-full>
-    <a-collapse>
+    <a-collapse :bordered="false">
       <a-collapse-item v-for="item in graphicGroups" :key="item.name" :header="item.name">
         <div grid="~ cols-2 gap-5" w-full>
           <div

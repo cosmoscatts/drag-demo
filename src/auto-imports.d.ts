@@ -85,14 +85,21 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getFetchParams: typeof import('./composables/table')['getFetchParams']
   const getFileBase64: typeof import('./composables/file')['getFileBase64']
+  const getFormArrowInfo: typeof import('./composables/meta2d/meta/arrow')['getFormArrowInfo']
+  const getFormArrows: typeof import('./composables/meta2d/meta/arrow')['getFormArrows']
+  const getFormArrowsInfo: typeof import('./composables/meta2d/meta/arrow')['getFormArrowsInfo']
   const getLayoutContentHeight: typeof import('./composables/layout')['getLayoutContentHeight']
   const getLayoutContentLeftDistance: typeof import('./composables/layout')['getLayoutContentLeftDistance']
+  const getLineTypeInfo: typeof import('./composables/meta2d/meta/line')['getLineTypeInfo']
   const getMatchedMenuItemsIfParentExist: typeof import('./composables/menu')['getMatchedMenuItemsIfParentExist']
   const getRandomBool: typeof import('./composables/common/random')['getRandomBool']
   const getRandomDate: typeof import('./composables/common/random')['getRandomDate']
   const getRandomInteger: typeof import('./composables/common/random')['getRandomInteger']
   const getRandomName: typeof import('./composables/common/random')['getRandomName']
   const getRandomStr: typeof import('./composables/common/random')['getRandomStr']
+  const getToArrowInfo: typeof import('./composables/meta2d/meta/arrow')['getToArrowInfo']
+  const getToArrows: typeof import('./composables/meta2d/meta/arrow')['getToArrows']
+  const getToArrowsInfo: typeof import('./composables/meta2d/meta/arrow')['getToArrowsInfo']
   const getTypeName: typeof import('./composables/common/function')['getTypeName']
   const getUserFlattenMenuTree: typeof import('./composables/menu')['getUserFlattenMenuTree']
   const h: typeof import('vue')['h']
@@ -178,6 +185,7 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const registerMeta2dPlugins: typeof import('./composables/meta2d/register')['registerMeta2dPlugins']
   const registerRoleOptions: typeof import('./composables/options/modules/system')['registerRoleOptions']
   const registerUserOptions: typeof import('./composables/options/modules/system')['registerUserOptions']
   const resolveComponent: typeof import('vue')['resolveComponent']
@@ -244,6 +252,7 @@ declare global {
   const useClipboardItems: typeof import('@vueuse/core')['useClipboardItems']
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
+  const useConfirm: typeof import('./composables/confirm')['useConfirm']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
   const useControlModal: typeof import('./composables/modal')['useControlModal']
   const useCounter: typeof import('@vueuse/core')['useCounter']
@@ -492,14 +501,17 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getFetchParams: UnwrapRef<typeof import('./composables/table')['getFetchParams']>
     readonly getFileBase64: UnwrapRef<typeof import('./composables/file')['getFileBase64']>
+    readonly getFormArrowInfo: UnwrapRef<typeof import('./composables/meta2d/meta/arrow')['getFormArrowInfo']>
     readonly getLayoutContentHeight: UnwrapRef<typeof import('./composables/layout')['getLayoutContentHeight']>
     readonly getLayoutContentLeftDistance: UnwrapRef<typeof import('./composables/layout')['getLayoutContentLeftDistance']>
+    readonly getLineTypeInfo: UnwrapRef<typeof import('./composables/meta2d/meta/line')['getLineTypeInfo']>
     readonly getMatchedMenuItemsIfParentExist: UnwrapRef<typeof import('./composables/menu')['getMatchedMenuItemsIfParentExist']>
     readonly getRandomBool: UnwrapRef<typeof import('./composables/common/random')['getRandomBool']>
     readonly getRandomDate: UnwrapRef<typeof import('./composables/common/random')['getRandomDate']>
     readonly getRandomInteger: UnwrapRef<typeof import('./composables/common/random')['getRandomInteger']>
     readonly getRandomName: UnwrapRef<typeof import('./composables/common/random')['getRandomName']>
     readonly getRandomStr: UnwrapRef<typeof import('./composables/common/random')['getRandomStr']>
+    readonly getToArrowInfo: UnwrapRef<typeof import('./composables/meta2d/meta/arrow')['getToArrowInfo']>
     readonly getTypeName: UnwrapRef<typeof import('./composables/common/function')['getTypeName']>
     readonly getUserFlattenMenuTree: UnwrapRef<typeof import('./composables/menu')['getUserFlattenMenuTree']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -584,6 +596,7 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly registerMeta2dPlugins: UnwrapRef<typeof import('./composables/meta2d/register')['registerMeta2dPlugins']>
     readonly registerRoleOptions: UnwrapRef<typeof import('./composables/options/modules/system')['registerRoleOptions']>
     readonly registerUserOptions: UnwrapRef<typeof import('./composables/options/modules/system')['registerUserOptions']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
@@ -650,6 +663,7 @@ declare module 'vue' {
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
+    readonly useConfirm: UnwrapRef<typeof import('./composables/confirm')['useConfirm']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useControlModal: UnwrapRef<typeof import('./composables/modal')['useControlModal']>
     readonly useCounter: UnwrapRef<typeof import('@vueuse/core')['useCounter']>
@@ -891,14 +905,17 @@ declare module '@vue/runtime-core' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getFetchParams: UnwrapRef<typeof import('./composables/table')['getFetchParams']>
     readonly getFileBase64: UnwrapRef<typeof import('./composables/file')['getFileBase64']>
+    readonly getFormArrowInfo: UnwrapRef<typeof import('./composables/meta2d/meta/arrow')['getFormArrowInfo']>
     readonly getLayoutContentHeight: UnwrapRef<typeof import('./composables/layout')['getLayoutContentHeight']>
     readonly getLayoutContentLeftDistance: UnwrapRef<typeof import('./composables/layout')['getLayoutContentLeftDistance']>
+    readonly getLineTypeInfo: UnwrapRef<typeof import('./composables/meta2d/meta/line')['getLineTypeInfo']>
     readonly getMatchedMenuItemsIfParentExist: UnwrapRef<typeof import('./composables/menu')['getMatchedMenuItemsIfParentExist']>
     readonly getRandomBool: UnwrapRef<typeof import('./composables/common/random')['getRandomBool']>
     readonly getRandomDate: UnwrapRef<typeof import('./composables/common/random')['getRandomDate']>
     readonly getRandomInteger: UnwrapRef<typeof import('./composables/common/random')['getRandomInteger']>
     readonly getRandomName: UnwrapRef<typeof import('./composables/common/random')['getRandomName']>
     readonly getRandomStr: UnwrapRef<typeof import('./composables/common/random')['getRandomStr']>
+    readonly getToArrowInfo: UnwrapRef<typeof import('./composables/meta2d/meta/arrow')['getToArrowInfo']>
     readonly getTypeName: UnwrapRef<typeof import('./composables/common/function')['getTypeName']>
     readonly getUserFlattenMenuTree: UnwrapRef<typeof import('./composables/menu')['getUserFlattenMenuTree']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -983,6 +1000,7 @@ declare module '@vue/runtime-core' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly registerMeta2dPlugins: UnwrapRef<typeof import('./composables/meta2d/register')['registerMeta2dPlugins']>
     readonly registerRoleOptions: UnwrapRef<typeof import('./composables/options/modules/system')['registerRoleOptions']>
     readonly registerUserOptions: UnwrapRef<typeof import('./composables/options/modules/system')['registerUserOptions']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
@@ -1049,6 +1067,7 @@ declare module '@vue/runtime-core' {
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
+    readonly useConfirm: UnwrapRef<typeof import('./composables/confirm')['useConfirm']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useControlModal: UnwrapRef<typeof import('./composables/modal')['useControlModal']>
     readonly useCounter: UnwrapRef<typeof import('@vueuse/core')['useCounter']>

@@ -36,8 +36,8 @@ function openFile() {
         // 3. 打开文件内容
         meta2d.open(JSON.parse(text))
 
-        // 可选：缩放到窗口大小展示
-        meta2d.fitView()
+        // TODO 可选：缩放到窗口大小展示
+        // meta2d.fitView()
       } catch (e) {
         console.error(e)
       }
@@ -134,8 +134,11 @@ function exportSvg() {
 
 <template>
   <a-dropdown trigger="hover" :popup-max-height="false">
-    <div cursor-pointer hover:text-primary>
-      文件
+    <div flex-y-center cursor-pointer gap-1 hover:text-primary>
+      <div i-ri-file-2-line />
+      <div>
+        文件
+      </div>
     </div>
     <template #content>
       <a-doption @click="newFile">

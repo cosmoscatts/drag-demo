@@ -18,9 +18,7 @@ import { formPens } from '@meta2d/form-diagram'
 import { chartsPens } from '@meta2d/le5le-charts'
 import { ftaAnchors, ftaPens, ftaPensbyCtx } from '@meta2d/fta-diagram'
 
-import { useSelection } from './selection'
 import Meta2dGraphics from './components/Meta2dGraphics.vue'
-import Meta2dProps from './components/Meta2dProps.vue'
 import Meta2dToolbar from './components/Meta2dToolbar.vue'
 
 import { LAYOUT_PARAMS as params } from '~/constants'

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useSelection } from '../selection'
-
 const { selections } = useSelection()
 
 const pen = ref<any>()

@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { SelectionMode, useSelection } from '../selection'
-import Meta2dFileProps from './Meta2dFileProps.vue'
-import Meta2dPenProps from './Meta2dPenProps.vue'
-
 const { selections } = useSelection()
 </script>
 

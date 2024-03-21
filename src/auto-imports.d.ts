@@ -23,6 +23,7 @@ declare global {
   const R: typeof import('./composables/request')['R']
   const RoleApi: typeof import('./server/api/role')['RoleApi']
   const SelectOptionsHandler: typeof import('./composables/select-options')['SelectOptionsHandler']
+  const SelectionMode: typeof import('./composables/meta2d/selection')['SelectionMode']
   const UserApi: typeof import('./server/api/user')['UserApi']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const assert: typeof import('./composables/common/function')['assert']
@@ -353,6 +354,7 @@ declare global {
   const useScroll: typeof import('@vueuse/core')['useScroll']
   const useScrollLock: typeof import('@vueuse/core')['useScrollLock']
   const useSearchForm: typeof import('./composables/form')['useSearchForm']
+  const useSelection: typeof import('./composables/meta2d/selection')['useSelection']
   const useSeoMeta: typeof import('@vueuse/head')['useSeoMeta']
   const useSessionStorage: typeof import('@vueuse/core')['useSessionStorage']
   const useShare: typeof import('@vueuse/core')['useShare']
@@ -442,6 +444,7 @@ declare module 'vue' {
     readonly O: UnwrapRef<typeof import('./composables/options/o')['O']>
     readonly R: UnwrapRef<typeof import('./composables/request')['R']>
     readonly RoleApi: UnwrapRef<typeof import('./server/api/role')['RoleApi']>
+    readonly SelectionMode: UnwrapRef<typeof import('./composables/meta2d/selection')['SelectionMode']>
     readonly UserApi: UnwrapRef<typeof import('./server/api/user')['UserApi']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly assert: UnwrapRef<typeof import('./composables/common/function')['assert']>
@@ -764,6 +767,7 @@ declare module 'vue' {
     readonly useScroll: UnwrapRef<typeof import('@vueuse/core')['useScroll']>
     readonly useScrollLock: UnwrapRef<typeof import('@vueuse/core')['useScrollLock']>
     readonly useSearchForm: UnwrapRef<typeof import('./composables/form')['useSearchForm']>
+    readonly useSelection: UnwrapRef<typeof import('./composables/meta2d/selection')['useSelection']>
     readonly useSeoMeta: UnwrapRef<typeof import('@vueuse/head')['useSeoMeta']>
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
@@ -846,6 +850,7 @@ declare module '@vue/runtime-core' {
     readonly O: UnwrapRef<typeof import('./composables/options/o')['O']>
     readonly R: UnwrapRef<typeof import('./composables/request')['R']>
     readonly RoleApi: UnwrapRef<typeof import('./server/api/role')['RoleApi']>
+    readonly SelectionMode: UnwrapRef<typeof import('./composables/meta2d/selection')['SelectionMode']>
     readonly UserApi: UnwrapRef<typeof import('./server/api/user')['UserApi']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly assert: UnwrapRef<typeof import('./composables/common/function')['assert']>
@@ -1168,6 +1173,7 @@ declare module '@vue/runtime-core' {
     readonly useScroll: UnwrapRef<typeof import('@vueuse/core')['useScroll']>
     readonly useScrollLock: UnwrapRef<typeof import('@vueuse/core')['useScrollLock']>
     readonly useSearchForm: UnwrapRef<typeof import('./composables/form')['useSearchForm']>
+    readonly useSelection: UnwrapRef<typeof import('./composables/meta2d/selection')['useSelection']>
     readonly useSeoMeta: UnwrapRef<typeof import('@vueuse/head')['useSeoMeta']>
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>

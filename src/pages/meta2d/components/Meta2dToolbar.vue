@@ -84,17 +84,16 @@ function clear() {
 
     <div flex-y-center gap-2>
       <Meta2dFileDropdown />
+
+      <Meta2dMiniMap />
+
+      <Meta2dMagnifier />
+
       <div>
-        缩略图
-      </div>
-      <div>
-        放大镜
+        快捷键
       </div>
       <div>
         预览
-      </div>
-      <div>
-        快捷键
       </div>
       <div>
         设置

@@ -21,12 +21,12 @@ onClickOutside(refEl, clear)
 </script>
 
 <template>
-  <a-tooltip content="文本">
+  <a-tooltip content="直线">
     <div
       ref="refEl" :class="selected ? 'text-primary !op100' : ''"
-      i-ri-text cursor-pointer icon-btn :draggable="true"
-      @dragstart="onDrag($event, 'text')"
-      @click="onClick($event, 'text')"
+      i-tabler-slash cursor-pointer icon-btn :draggable="true"
+      @dragstart="onDrag($event, 'line')"
+      @click="onClick($event, 'line')"
     />
   </a-tooltip>
 </template>

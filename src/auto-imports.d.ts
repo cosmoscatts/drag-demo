@@ -26,6 +26,7 @@ declare global {
   const SelectionMode: typeof import('./composables/meta2d/selection')['SelectionMode']
   const UserApi: typeof import('./server/api/user')['UserApi']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
+  const addMeta2dShape: typeof import('./composables/meta2d/add-shape')['addMeta2dShape']
   const assert: typeof import('./composables/common/function')['assert']
   const assignObj: typeof import('./composables/common/object')['assignObj']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -451,6 +452,7 @@ declare module 'vue' {
     readonly SelectionMode: UnwrapRef<typeof import('./composables/meta2d/selection')['SelectionMode']>
     readonly UserApi: UnwrapRef<typeof import('./server/api/user')['UserApi']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly addMeta2dShape: UnwrapRef<typeof import('./composables/meta2d/add-shape')['addMeta2dShape']>
     readonly assert: UnwrapRef<typeof import('./composables/common/function')['assert']>
     readonly assignObj: UnwrapRef<typeof import('./composables/common/object')['assignObj']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -859,6 +861,7 @@ declare module '@vue/runtime-core' {
     readonly SelectionMode: UnwrapRef<typeof import('./composables/meta2d/selection')['SelectionMode']>
     readonly UserApi: UnwrapRef<typeof import('./server/api/user')['UserApi']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly addMeta2dShape: UnwrapRef<typeof import('./composables/meta2d/add-shape')['addMeta2dShape']>
     readonly assert: UnwrapRef<typeof import('./composables/common/function')['assert']>
     readonly assignObj: UnwrapRef<typeof import('./composables/common/object')['assignObj']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>

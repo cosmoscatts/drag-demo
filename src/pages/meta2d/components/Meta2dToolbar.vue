@@ -98,7 +98,8 @@ defineExpose({
 
       <div i-ri-pen-nib-line cursor-pointer icon-btn />
       <div i-ri-ball-pen-line cursor-pointer icon-btn />
-      <div i-tabler-slash cursor-pointer icon-btn />
+
+      <Meta2dLine />
 
       <!-- 连线 -->
       <div>

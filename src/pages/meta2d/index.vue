@@ -23,14 +23,25 @@ import Meta2dGraphics from './component/Meta2dGraphics.vue'
 import Meta2dProps from './component/Meta2dProps.vue'
 
 import { LAYOUT_PARAMS as params } from '~/constants'
+import equipImage2 from '~/images/drag/gaoyagang.svg'
 
 const { select } = useSelection()
+
+const gridColor = computed(() => isDark.value ? '#484849' : '#E5E6EB')
 
 const meta2dOptions: any = {
   rule: true, // 是否开启标尺
   disableScale: true,
+  gridColor: gridColor.value,
   grid: true, // 背景网格
 }
+
+watch(isDark, () => {
+  meta2d.setGrid({
+    gridColor: gridColor.value,
+  })
+  meta2d.render()
+})
 
 onMounted(() => {
   // 创建实例
@@ -70,6 +81,26 @@ onMounted(() => {
     meta2d.open(data)
   }
 
+  const pens = [
+    {
+      name: 'rectangle',
+      text: '矩形',
+      x: 100,
+      y: 100,
+      width: 100,
+      height: 100,
+    },
+    {
+      width: 120,
+      height: 80,
+      x: 400,
+      y: 100,
+      image: equipImage2,
+      name: 'image',
+    },
+  ]
+  meta2d.addPens(pens)
+
   meta2d.on('active', active)
   meta2d.on('inactive', inactive)
 })
@@ -93,11 +124,11 @@ const contentHeight = computed(() => {
 
 <template>
   <div grid="~ cols-7" border="1 base" :style="{ height: contentHeight }">
-    <div col-span-1 border-r="1 base" :style="{ height: contentHeight }" of-y-auto>
+    <div col-span-1 border="r-1 base" :style="{ height: contentHeight }" of-y-auto>
       <Meta2dGraphics />
     </div>
     <div id="meta2d" col-span-5 :style="{ height: contentHeight }" />
-    <div col-span-1 border-l="1 base" :style="{ height: contentHeight }" of-y-auto>
+    <div col-span-1 border="l-1 base" :style="{ height: contentHeight }" of-y-auto>
       <Meta2dProps />
     </div>
   </div>

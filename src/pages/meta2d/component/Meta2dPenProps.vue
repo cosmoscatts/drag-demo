@@ -18,8 +18,7 @@ function getPen() {
   if (pen.value.globalAlpha === undefined) {
     pen.value.globalAlpha = 1
   }
-
-  rect.value = meta2d.getPenRect(pen.value)
+  rect.value = meta2d?.getPenRect?.(pen.value)
 }
 
 // 监听选中不同图元

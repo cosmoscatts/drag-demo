@@ -14,7 +14,7 @@ const selections = reactive<{
   pen: undefined,
 })
 
-export function useSelection() {
+export function useMeta2dSelection() {
   const select = (pens?: Pen[]) => {
     if (!pens || pens.length !== 1) {
       selections.mode = SelectionMode.File

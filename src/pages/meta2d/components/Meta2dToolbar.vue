@@ -67,6 +67,12 @@ function scaleWindow() {
   meta2d.fitView()
 }
 
+const { selections } = useMeta2dSelection()
+function checkoutFileProps() {
+  selections.mode = SelectionMode.File
+  selections.pen = undefined
+}
+
 defineExpose({
   updateDisableScale,
 })
@@ -152,7 +158,7 @@ defineExpose({
       <div>
         预览
       </div>
-      <div>
+      <div cursor-pointer hover:text-primary @click="checkoutFileProps">
         设置
       </div>
 

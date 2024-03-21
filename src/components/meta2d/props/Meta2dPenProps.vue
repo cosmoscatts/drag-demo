@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { selections } = useSelection()
+const { selections } = useMeta2dSelection()
 
 const pen = ref<any>()
 // 位置数据。当前版本位置需要动态计算获取
@@ -63,7 +63,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <a-form v-if="pen" :model="form" auto-label-width>
+    <a-form v-if="pen" :model="form" auto-label-width label-align="left" size="small">
       <h5 mb-4 font-bold>
         图元
       </h5>

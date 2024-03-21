@@ -27,7 +27,7 @@ import equipImage2 from '~/images/drag/gaoyagang.svg'
 const refToolbar = ref()
 const showProps = ref(true)
 
-const { select } = useSelection()
+const { select } = useMeta2dSelection()
 
 watch(isDark, () => {
   meta2d.setGrid({

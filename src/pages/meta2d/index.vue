@@ -40,6 +40,12 @@ watch(isDark, () => {
   meta2d.setGrid({
     gridColor: gridColor.value,
   })
+  Object.values(meta2d.store.pens).forEach((pen) => {
+    meta2d.setValue({
+      id: pen.id,
+      color: isDark.value ? '#F6F6F6' : '#1D2129',
+    })
+  })
   meta2d.render()
 })
 

@@ -734,7 +734,7 @@ const graphicGroups = [
       },
     ],
   },
-]
+] as any[]
 
 function dragStart(e: any, elem: any) {
   if (!elem) {

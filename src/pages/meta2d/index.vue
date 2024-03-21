@@ -24,6 +24,7 @@ import Meta2dToolbar from './components/Meta2dToolbar.vue'
 import { LAYOUT_PARAMS as params } from '~/constants'
 import equipImage2 from '~/images/drag/gaoyagang.svg'
 
+const refToolbar = ref()
 const showProps = ref(true)
 
 const { select } = useSelection()
@@ -128,11 +129,16 @@ watch([width, height], ([w, h]) => {
 
 const isViewMounted = useMounted()
 provide('isViewMounted', isViewMounted)
+
+function updateFilePropsCallback() {
+  refToolbar.value?.updateDisableScale()
+}
+provide('updateFilePropsCallback', updateFilePropsCallback)
 </script>
 
 <template>
   <div>
-    <Meta2dToolbar v-model="showProps" />
+    <Meta2dToolbar ref="refToolbar" v-model="showProps" />
     <div grid="~ cols-7" border="1 base" :style="{ height: contentHeight }">
       <div col-span-1 border="r-1 base" :style="{ height: contentHeight }" of-y-auto>
         <Meta2dGraphics />

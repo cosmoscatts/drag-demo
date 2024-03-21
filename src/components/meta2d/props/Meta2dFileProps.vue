@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const isViewMounted = inject('isViewMounted') as Ref<boolean>
+const updateFilePropsCallback = inject('updateFilePropsCallback') as () => void
 
 const options = computed(() => {
   return meta2d?.getOptions?.()
@@ -42,6 +43,7 @@ function onChangeOptions() {
   meta2d.store.patchFlagsTop = true
   ;(meta2d.store as any).patchFlagsBackground = true
   meta2d.render()
+  updateFilePropsCallback()
 }
 </script>
 

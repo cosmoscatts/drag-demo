@@ -1,5 +1,21 @@
 <script setup lang="ts">
-const isDrawLine = ref<boolean>(false)
+const isViewMounted = inject('isViewMounted') as Ref<boolean>
+
+const isDrawLine = ref(false)
+
+const disableScale = ref(true)
+function updateDisableScale() {
+  if (!isViewMounted.value) {
+    disableScale.value = true
+    return
+  }
+  disableScale.value = meta2d.getOptions()?.disableScale || false
+}
+
+onMounted(async () => {
+  await until(isViewMounted)
+  updateDisableScale()
+})
 
 function undo() {
   meta2d.undo()
@@ -20,6 +36,40 @@ function clear() {
   })
   meta2d.clear()
 }
+
+const scale = ref(0)
+
+onMounted(() => {
+  const timer = setInterval(() => {
+    if (meta2d) {
+      clearInterval(timer)
+      // 获取初始缩放比例
+      scaleSubscriber(meta2d.store.data.scale)
+
+      // 监听缩放
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
+      meta2d.on('scale', scaleSubscriber)
+    }
+  }, 200)
+})
+
+function scaleSubscriber(val: number) {
+  scale.value = Math.round(val * 100)
+}
+
+function scaleDefault() {
+  meta2d.scale(1)
+  meta2d.centerView()
+}
+
+function scaleWindow() {
+  meta2d.fitView()
+}
+
+defineExpose({
+  updateDisableScale,
+})
 </script>
 
 <template>
@@ -76,10 +126,17 @@ function clear() {
       <a-divider direction="vertical" />
 
       <div op-50>
-        100%
+        {{ scale }}%
       </div>
-      <div i-mingcute-refresh-2-line cursor-pointer icon-btn />
-      <div i-fluent-table-resize-column-24-regular cursor-pointer icon-btn />
+      <a-tooltip content="恢复默认缩放">
+        <div i-mingcute-refresh-2-line cursor-pointer icon-btn :class="disableScale ? 'pointer-events-none op-10' : ''" @click="scaleDefault" />
+      </a-tooltip>
+      <a-tooltip content="元素聚焦">
+        <div i-fluent-table-resize-column-24-regular cursor-pointer icon-btn :class="disableScale ? 'pointer-events-none op-10' : ''" @click="scaleWindow" />
+      </a-tooltip>
+      <div v-if="disableScale" text-sm op-30>
+        (已禁用缩放)
+      </div>
     </div>
 
     <div flex-y-center gap-2>

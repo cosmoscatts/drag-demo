@@ -123,6 +123,7 @@ declare module 'vue' {
     Meta2dMagnifier: typeof import('./components/meta2d/toolbar/Meta2dMagnifier.vue')['default']
     Meta2dMiniMap: typeof import('./components/meta2d/toolbar/Meta2dMiniMap.vue')['default']
     Meta2dPenProps: typeof import('./components/meta2d/props/Meta2dPenProps.vue')['default']
+    Meta2dPreview: typeof import('./components/meta2d/preview/Meta2dPreview.vue')['default']
     Meta2dProps: typeof import('./components/meta2d/props/Meta2dProps.vue')['default']
     Meta2dShowProps: typeof import('./components/meta2d/toolbar/Meta2dShowProps.vue')['default']
     Meta2dText: typeof import('./components/meta2d/toolbar/Meta2dText.vue')['default']

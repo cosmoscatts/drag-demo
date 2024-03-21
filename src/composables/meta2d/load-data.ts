@@ -13,23 +13,31 @@ export function loadMeta2dData() {
     meta2d.open(data)
   }
 
-  // const pens = [
-  //   {
-  //     name: 'rectangle',
-  //     text: '矩形',
-  //     x: 100,
-  //     y: 100,
-  //     width: 100,
-  //     height: 100,
-  //   },
-  //   {
-  //     width: 120,
-  //     height: 80,
-  //     x: 400,
-  //     y: 100,
-  //     image: equipImage2,
-  //     name: 'image',
-  //   },
-  // ]
-  // meta2d.addPens(pens)
+  const pens = [
+    {
+      id: '101',
+      name: 'rectangle',
+      text: '矩形',
+      x: 100,
+      y: 100,
+      width: 100,
+      height: 100,
+    },
+    // {
+    //   width: 120,
+    //   height: 80,
+    //   x: 400,
+    //   y: 100,
+    //   image: equipImage2,
+    //   name: 'image',
+    // },
+  ]
+  meta2d.addPens(pens)
+
+  // useIntervalFn(() => {
+  //   meta2d.setValue({
+  //     id: '101',
+  //     text: `${getRandomInteger(100)}V`,
+  //   })
+  // }, 50)
 }

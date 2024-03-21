@@ -28,18 +28,9 @@ const showProps = ref(true)
 
 const { select } = useSelection()
 
-const gridColor = computed(() => isDark.value ? '#484849' : '#E5E6EB')
-
-const meta2dOptions: any = {
-  rule: true, // 是否开启标尺
-  disableScale: true,
-  gridColor: gridColor.value,
-  grid: true, // 背景网格
-}
-
 watch(isDark, () => {
   meta2d.setGrid({
-    gridColor: gridColor.value,
+    gridColor: defaultMeta2dGridColor.value,
   })
   Object.values(meta2d.store.pens).forEach((pen) => {
     meta2d.setValue({
@@ -53,7 +44,7 @@ watch(isDark, () => {
 onMounted(() => {
   // 创建实例
   // eslint-disable-next-line no-new
-  new Meta2d('meta2d', meta2dOptions)
+  new Meta2d('meta2d', defaultMeta2dOptions)
 
   // 按需注册图形库
   // 以下为自带基础图形库
@@ -134,6 +125,9 @@ const { width, height } = useElementSize(refEl)
 watch([width, height], ([w, h]) => {
   meta2d.resize(w, h)
 })
+
+const isViewMounted = useMounted()
+provide('isViewMounted', isViewMounted)
 </script>
 
 <template>

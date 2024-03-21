@@ -3,7 +3,7 @@ const { currentToArrow, toArrows, changeToArrow } = getToArrowInfo()
 </script>
 
 <template>
-  <a-dropdown trigger="hover">
+  <a-dropdown trigger="hover" :popup-max-height="false">
     <div>
       <svg cursor-pointer text-lg icon-btn class="l-icon" aria-hidden="true">
         <use
@@ -16,7 +16,7 @@ const { currentToArrow, toArrows, changeToArrow } = getToArrowInfo()
     <template #content>
       <a-doption v-for="item in toArrows" :key="item.value">
         <div flex-center @click="changeToArrow(item.value)">
-          <svg class="l-icon" aria-hidden="true">
+          <svg class="l-icon" aria-hidden="true" text-30px>
             <use :xlink:href="item.icon" />
           </svg>
         </div>

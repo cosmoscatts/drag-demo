@@ -1,87 +1,77 @@
 <script lang="ts" setup>
-const form = reactive({
-  // 画布选项
-  grid: true,
-  gridSize: 10,
-  gridRotate: undefined,
-  gridColor: undefined,
-  rule: true,
-  // 图纸数据
-  name: '',
+const isViewMounted = inject('isViewMounted') as Ref<boolean>
+
+const options = computed(() => {
+  return meta2d?.getOptions?.()
+})
+const form = reactive<any>({
+  grid: undefined,
+  gridSize: undefined,
+  rule: undefined,
   background: undefined,
-  color: undefined,
+  disableScale: undefined,
 })
 
-onMounted(() => {
-  const d: any = meta2d.data?.()
-  form.name = d?.name || ''
-  form.background = d?.background
-  form.color = d?.color
-
-  Object.assign(form, meta2d.getOptions?.())
+onMounted(async () => {
+  await until(isViewMounted)
+  form.grid = options.value.grid
+  form.gridSize = options.value.gridSize
+  form.disableScale = options.value.disableScale
+  form.rule = options.value.rule
+  form.background = meta2d.store.data.background
 })
 
-function onChangeData() {
-  Object.assign(meta2d.store.data, form)
-  ;(meta2d.store as any).patchFlagsBackground = true
-  meta2d.render()
-}
+// function onChangeBackground() {
+//   meta2d.setBackgroundColor(form.background)
+//   ;(meta2d.store as any).patchFlagsBackground = true
+//   meta2d.render()
+// }
 
 function onChangeOptions() {
-  // const { grid, gridSize, gridColor, rule } = form
-  // meta2d.setOptions({
-  //   grid,
-  //   gridColor,
-  //   gridSize,
-  //   // gridRotate,
-  //   rule,
-  // })
-  // meta2d.store.patchFlagsTop = true
-  // ;(meta2d.store as any).patchFlagsBackground = true
-  // meta2d.render()
+  const { grid, gridSize, rule, disableScale } = form
+  meta2d.setRule({
+    rule,
+  })
+  meta2d.setOptions({
+    disableScale,
+  })
+  meta2d.setGrid({
+    grid,
+    gridSize,
+  })
+  meta2d.store.patchFlagsTop = true
+  ;(meta2d.store as any).patchFlagsBackground = true
+  meta2d.render()
 }
 </script>
 
 <template>
   <div>
     <h5 mb-4 font-bold>
-      图纸
+      图纸设置
     </h5>
-    <a-form :model="form" auto-label-width>
-      <a-form-item label="图纸名称" name="name">
-        <a-input v-model="form.name" @change="onChangeData" />
-      </a-form-item>
-      <a-divider />
+    <a-form :model="form" auto-label-width label-align="left">
       <a-form-item label="网格" name="grid">
         <a-switch v-model="form.grid" @change="onChangeOptions" />
       </a-form-item>
       <a-form-item label="网格大小" name="gridSize">
         <a-input-number v-model="form.gridSize" hide-button @change="onChangeOptions" />
       </a-form-item>
-      <a-form-item label="网格角度" name="gridRotate">
-        <a-input-number
-          v-model="form.gridRotate"
-          hide-button
-          @change="onChangeOptions"
-        />
-      </a-form-item>
-      <!-- <a-form-item label="网格颜色" name="gridColor">
-        <a-color-picker v-model="form.gridColor" w-full @change="onChangeData" />
-      </a-form-item> -->
 
       <a-divider />
 
       <a-form-item label="标尺" name="rule">
         <a-switch v-model="form.rule" @change="onChangeOptions" />
       </a-form-item>
-      <!--
-      <a-divider /> -->
 
-      <!-- <a-form-item label="背景颜色" name="background">
-        <a-color-picker v-model="form.background" w-full @change="onChangeData" />
+      <a-form-item label="图纸缩放" name="disableScale">
+        <a-switch v-model="form.disableScale" :checked-value="false" :unchecked-value="true" @change="onChangeOptions" />
       </a-form-item>
-      <a-form-item label="图元默认颜色" name="color">
-        <a-color-picker v-model="form.color" w-full @change="onChangeData" />
+
+      <!-- <a-divider />
+
+      <a-form-item label="背景颜色" name="background">
+        <a-color-picker v-model="form.background" disabled-alpha show-text @change="onChangeBackground" />
       </a-form-item> -->
     </a-form>
   </div>

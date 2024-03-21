@@ -62,6 +62,8 @@ declare global {
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const deepClone: typeof import('./composables/common/object')['deepClone']
+  const defaultMeta2dGridColor: typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dGridColor']
+  const defaultMeta2dOptions: typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dOptions']
   const defaultValidateTrigger: typeof import('./composables/form')['defaultValidateTrigger']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
@@ -481,6 +483,8 @@ declare module 'vue' {
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly deepClone: UnwrapRef<typeof import('./composables/common/object')['deepClone']>
+    readonly defaultMeta2dGridColor: UnwrapRef<typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dGridColor']>
+    readonly defaultMeta2dOptions: UnwrapRef<typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dOptions']>
     readonly defaultValidateTrigger: UnwrapRef<typeof import('./composables/form')['defaultValidateTrigger']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
@@ -887,6 +891,8 @@ declare module '@vue/runtime-core' {
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly deepClone: UnwrapRef<typeof import('./composables/common/object')['deepClone']>
+    readonly defaultMeta2dGridColor: UnwrapRef<typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dGridColor']>
+    readonly defaultMeta2dOptions: UnwrapRef<typeof import('./composables/meta2d/meta/default-options')['defaultMeta2dOptions']>
     readonly defaultValidateTrigger: UnwrapRef<typeof import('./composables/form')['defaultValidateTrigger']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>

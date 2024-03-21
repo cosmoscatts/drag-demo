@@ -123,6 +123,7 @@ declare module 'vue' {
     Meta2dPenProps: typeof import('./components/meta2d/props/Meta2dPenProps.vue')['default']
     Meta2dProps: typeof import('./components/meta2d/props/Meta2dProps.vue')['default']
     Meta2dShowProps: typeof import('./components/meta2d/toolbar/Meta2dShowProps.vue')['default']
+    Meta2dText: typeof import('./components/meta2d/toolbar/Meta2dText.vue')['default']
     Meta2dToArrowDropdown: typeof import('./components/meta2d/toolbar/Meta2dToArrowDropdown.vue')['default']
     PreloadAnimationPage: typeof import('./components/PreloadAnimationPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -94,7 +94,8 @@ defineExpose({
 
       <a-divider direction="vertical" />
 
-      <div i-ri-text cursor-pointer icon-btn />
+      <Meta2dText />
+
       <div i-ri-pen-nib-line cursor-pointer icon-btn />
       <div i-ri-ball-pen-line cursor-pointer icon-btn />
       <div i-tabler-slash cursor-pointer icon-btn />

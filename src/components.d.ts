@@ -104,6 +104,7 @@ declare module 'vue' {
     LayoutTabs: typeof import('./components/layout/tab/LayoutTabs.vue')['default']
     LayoutVertical: typeof import('./components/layout/LayoutVertical.vue')['default']
     LayoutVerticalMix: typeof import('./components/layout/LayoutVerticalMix.vue')['default']
+    Meta2dContextMenu: typeof import('./components/meta2d/Meta2dContextMenu.vue')['default']
     Meta2dDrawLine: typeof import('./components/meta2d/toolbar/Meta2dDrawLine.vue')['default']
     Meta2dFileDropdown: typeof import('./components/meta2d/toolbar/Meta2dFileDropdown.vue')['default']
     Meta2dFileProps: typeof import('./components/meta2d/props/Meta2dFileProps.vue')['default']

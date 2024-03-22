@@ -37,7 +37,9 @@ provide('preview', preview)
       <div col-span-1 border="r-1 base" :style="{ height: contentHeight }" of-y-auto>
         <Meta2dGraphics />
       </div>
-      <Meta2dView v-if="!previewVisible" :style="{ height: contentHeight, width: '100%' }" :class="showProps ? 'col-span-5' : 'col-span-6'" />
+      <Meta2dContextMenu>
+        <Meta2dView v-if="!previewVisible" :style="{ height: contentHeight, width: '100%' }" :class="showProps ? 'col-span-5' : 'col-span-6'" />
+      </Meta2dContextMenu>
       <div v-show="showProps" col-span-1 border="l-1 base" :style="{ height: contentHeight }" of-y-auto>
         <Meta2dProps />
       </div>

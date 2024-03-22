@@ -107,8 +107,9 @@ defineExpose({
 
       <Meta2dText />
 
-      <div i-ri-pen-nib-line cursor-pointer icon-btn />
-      <div i-ri-ball-pen-line cursor-pointer icon-btn />
+      <Meta2dPen />
+
+      <Meta2dPencil />
 
       <Meta2dLine />
 

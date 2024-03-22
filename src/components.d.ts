@@ -112,6 +112,8 @@ declare module 'vue' {
     Meta2dLineTypeDropdown: typeof import('./components/meta2d/toolbar/Meta2dLineTypeDropdown.vue')['default']
     Meta2dMagnifier: typeof import('./components/meta2d/toolbar/Meta2dMagnifier.vue')['default']
     Meta2dMiniMap: typeof import('./components/meta2d/toolbar/Meta2dMiniMap.vue')['default']
+    Meta2dPen: typeof import('./components/meta2d/toolbar/Meta2dPen.vue')['default']
+    Meta2dPencil: typeof import('./components/meta2d/toolbar/Meta2dPencil.vue')['default']
     Meta2dPenProps: typeof import('./components/meta2d/props/Meta2dPenProps.vue')['default']
     Meta2dPreview: typeof import('./components/meta2d/preview/Meta2dPreview.vue')['default']
     Meta2dPreviewModal: typeof import('./components/meta2d/preview/Meta2dPreviewModal.vue')['default']

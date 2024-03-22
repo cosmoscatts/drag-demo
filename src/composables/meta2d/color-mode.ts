@@ -4,7 +4,7 @@ export function changeMeta2dColor() {
   })
   Object.values(meta2d.store.pens).forEach((pen) => {
     meta2d.setValue({
-      id: pen.id,
+      id: pen?.id,
       color: isDark.value ? '#F6F6F6' : '#1D2129',
     })
   })

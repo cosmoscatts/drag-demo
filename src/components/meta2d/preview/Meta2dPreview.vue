@@ -19,7 +19,7 @@ function changeColor() {
   })
   Object.values(previewMeta2d.store.pens).forEach((pen) => {
     previewMeta2d!.setValue({
-      id: pen.id,
+      id: pen?.id,
       color: isDark.value ? '#F6F6F6' : '#1D2129',
     })
   })

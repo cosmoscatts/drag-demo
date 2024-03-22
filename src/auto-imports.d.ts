@@ -33,6 +33,7 @@ declare global {
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const basePagination: typeof import('./composables/table')['basePagination']
   const batchInvoke: typeof import('./composables/common/function')['batchInvoke']
+  const bindMeta2dActive: typeof import('./composables/meta2d/active')['bindMeta2dActive']
   const breakpoints: typeof import('./composables/screen')['breakpoints']
   const capitalize: typeof import('./composables/common/string')['capitalize']
   const ceil: typeof import('./composables/common/number')['ceil']
@@ -461,6 +462,7 @@ declare module 'vue' {
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly basePagination: UnwrapRef<typeof import('./composables/table')['basePagination']>
     readonly batchInvoke: UnwrapRef<typeof import('./composables/common/function')['batchInvoke']>
+    readonly bindMeta2dActive: UnwrapRef<typeof import('./composables/meta2d/active')['bindMeta2dActive']>
     readonly breakpoints: UnwrapRef<typeof import('./composables/screen')['breakpoints']>
     readonly capitalize: UnwrapRef<typeof import('./composables/common/string')['capitalize']>
     readonly ceil: UnwrapRef<typeof import('./composables/common/number')['ceil']>
@@ -872,6 +874,7 @@ declare module '@vue/runtime-core' {
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly basePagination: UnwrapRef<typeof import('./composables/table')['basePagination']>
     readonly batchInvoke: UnwrapRef<typeof import('./composables/common/function')['batchInvoke']>
+    readonly bindMeta2dActive: UnwrapRef<typeof import('./composables/meta2d/active')['bindMeta2dActive']>
     readonly breakpoints: UnwrapRef<typeof import('./composables/screen')['breakpoints']>
     readonly capitalize: UnwrapRef<typeof import('./composables/common/string')['capitalize']>
     readonly ceil: UnwrapRef<typeof import('./composables/common/number')['ceil']>

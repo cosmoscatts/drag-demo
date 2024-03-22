@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Pen } from '@meta2d/core'
 import { Meta2d } from '@meta2d/core'
 import Meta2dGraphics from './components/Meta2dGraphics.vue'
 import Meta2dToolbar from './components/Meta2dToolbar.vue'
@@ -7,8 +6,6 @@ import { LAYOUT_PARAMS as params } from '~/constants'
 
 const refToolbar = ref()
 const showProps = ref(true)
-
-const { select } = useMeta2dSelection()
 
 watch(isDark, changeMeta2dColor)
 
@@ -26,17 +23,9 @@ onMounted(() => {
   // 适配暗色风格颜色
   changeMeta2dColor()
 
-  meta2d.on('active', active)
-  meta2d.on('inactive', inactive)
+  // 绑定激活事件
+  bindMeta2dActive()
 })
-
-function active(pens?: Pen[]) {
-  select(pens)
-}
-
-function inactive() {
-  select()
-}
 
 onUnmounted(() => {
   meta2d.destroy()

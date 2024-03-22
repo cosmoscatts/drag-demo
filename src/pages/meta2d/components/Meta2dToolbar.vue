@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { deepClone } from '@meta2d/core'
+
 const isViewMounted = inject('isViewMounted') as Ref<boolean>
 
 const refShowProps = ref()
@@ -76,9 +78,11 @@ function checkoutFileProps() {
 
 function save() {
   Message.success('图纸数据已保存成功')
-  const data = meta2d.data()
+  const data = deepClone(meta2d.data())
   localStorage.setItem('meta2d', JSON.stringify(data))
 }
+
+const preview = inject('preview') as () => void
 
 defineExpose({
   updateDisableScale,
@@ -148,7 +152,7 @@ defineExpose({
       <div>
         快捷键
       </div>
-      <div>
+      <div cursor-pointer hover:text-primary @click="preview">
         预览
       </div>
       <div cursor-pointer hover:text-primary @click="checkoutFileProps">
@@ -166,5 +170,7 @@ defineExpose({
         保存
       </div>
     </div>
+
+    <Meta2dPreviewModal :="$attrs" />
   </div>
 </template>

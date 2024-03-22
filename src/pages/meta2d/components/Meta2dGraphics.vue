@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { s8 } from '@meta2d/core'
 import equipImage from '~/images/drag/equip.png'
 import equipImage2 from '~/images/drag/gaoyagang.svg'
 
@@ -742,13 +743,14 @@ function dragStart(e: any, elem: any) {
   }
   e.stopPropagation()
 
+  const data = { ...elem.data, id: s8() }
   // 拖拽事件
   if (e instanceof DragEvent) {
     // 设置拖拽数据
-    e.dataTransfer?.setData('Meta2d', JSON.stringify(elem.data))
+    e.dataTransfer?.setData('Meta2d', JSON.stringify(data))
   } else {
     // 支持单击添加图元。平板模式
-    meta2d.canvas.addCaches = [elem.data]
+    meta2d.canvas.addCaches = [data]
   }
 }
 </script>

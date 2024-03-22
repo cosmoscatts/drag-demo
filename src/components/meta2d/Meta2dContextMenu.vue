@@ -50,15 +50,17 @@ function close() {
 // })
 
 function redo() {
-
+  if (!meta2d) return
+  meta2d.redo()
 }
 
 function undo() {
-
+  if (!meta2d) return
+  meta2d.undo()
 }
 
 function lock() {
-
+  meta2d.lock(2)
 }
 
 function combine() {
@@ -66,7 +68,7 @@ function combine() {
 }
 
 function cut() {
-
+  meta2d.cut()
 }
 
 function copy() {

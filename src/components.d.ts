@@ -115,6 +115,7 @@ declare module 'vue' {
     Meta2dShowProps: typeof import('./components/meta2d/toolbar/Meta2dShowProps.vue')['default']
     Meta2dText: typeof import('./components/meta2d/toolbar/Meta2dText.vue')['default']
     Meta2dToArrowDropdown: typeof import('./components/meta2d/toolbar/Meta2dToArrowDropdown.vue')['default']
+    Meta2dView: typeof import('./components/meta2d/Meta2dView.vue')['default']
     PreloadAnimationPage: typeof import('./components/PreloadAnimationPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

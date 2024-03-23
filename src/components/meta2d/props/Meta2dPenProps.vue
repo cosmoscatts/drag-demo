@@ -62,7 +62,21 @@ function changeRect(prop: string) {
   meta2d.setValue(v, { render: true })
 }
 
-onMounted(getPen)
+onMounted(() => {
+  getPen()
+  meta2d.on('update', () => {
+    getPen()
+  })
+  meta2d.on('resizePens', () => {
+    getPen()
+  })
+  meta2d.on('rotatePens', () => {
+    getPen()
+  })
+  meta2d.on('valueUpdate', () => {
+    getPen()
+  })
+})
 </script>
 
 <template>

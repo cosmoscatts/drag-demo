@@ -198,6 +198,42 @@ function paste() {
   if (!meta2d) return
   meta2d.paste()
 }
+
+function up() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value || isPens.value) return
+
+  meta2d.up(selections.pen as Pen)
+}
+
+function down() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value || isPens.value) return
+
+  meta2d.down(selections.pen as Pen)
+}
+
+function top() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value || isPens.value) return
+
+  meta2d.top(selections.pen as Pen)
+}
+
+function bottom() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value || isPens.value) return
+
+  meta2d.bottom(selections.pen as Pen)
+}
 </script>
 
 <template>
@@ -205,23 +241,31 @@ function paste() {
     <slot />
     <template #content>
       <div w-160px bg="[var(--color-bg-popup)]" border="1 base" py-2px shadow-lg>
-        <a-doption>置顶</a-doption>
-        <a-doption>置底</a-doption>
-        <a-doption>上一个图层</a-doption>
-        <a-doption>下一个图层</a-doption>
+        <a-doption :disabled="!hasPen || isPens" @click="top">
+          置顶
+        </a-doption>
+        <a-doption :disabled="!hasPen || isPens" @click="bottom">
+          置底
+        </a-doption>
+        <a-doption :disabled="!hasPen || isPens" @click="up">
+          上一个图层
+        </a-doption>
+        <a-doption :disabled="!hasPen || isPens" @click="down">
+          下一个图层
+        </a-doption>
 
         <div my-2px border-t-1 border-base />
 
-        <a-doption v-if="!hasLockedFile && !hasPen" @click.prevent="lockFile">
+        <a-doption v-if="!hasLockedFile && !hasPen" @click="lockFile">
           锁定图纸
         </a-doption>
-        <a-doption v-if="hasLockedFile && !hasPen" @click.prevent="unlockFile">
+        <a-doption v-if="hasLockedFile && !hasPen" @click="unlockFile">
           取消锁定图纸
         </a-doption>
-        <a-doption v-if="!hasLocked && hasPen" :disabled="hasLockedFile" @click.prevent="lock">
+        <a-doption v-if="!hasLocked && hasPen" :disabled="hasLockedFile" @click="lock">
           锁定
         </a-doption>
-        <a-doption v-if="hasLocked && hasPen" :disabled="hasLockedFile" @click.prevent="unlock">
+        <a-doption v-if="hasLocked && hasPen" :disabled="hasLockedFile" @click="unlock">
           取消锁定
         </a-doption>
         <a-doption v-if="showCombine" @click="combine">

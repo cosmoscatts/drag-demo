@@ -48,6 +48,7 @@ declare module 'vue' {
     ATabs: typeof import('@arco-design/web-vue')['Tabs']
     ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     ATree: typeof import('@arco-design/web-vue')['Tree']
+    ATrigger: typeof import('@arco-design/web-vue')['Trigger']
     CommonBtn: typeof import('./components/common/buttons/CommonBtn.vue')['default']
     CommonBtnAdd: typeof import('./components/common/buttons/CommonBtnAdd.vue')['default']
     CommonBtnDel: typeof import('./components/common/buttons/CommonBtnDel.vue')['default']

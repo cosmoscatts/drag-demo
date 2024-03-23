@@ -1,140 +1,280 @@
 <script setup lang="ts">
-const refEl = ref()
+import type { Pen } from '@meta2d/core'
 
-function close() {
+const { selections } = useMeta2dSelection()
 
+// 是否选中图元
+const hasPen = computed(() => !!selections.pens?.length)
+// 是否选中多个图元
+const isPens = computed(() => {
+  const length = selections.pens?.length || 0
+  return hasPen.value && length > 1
+})
+
+const showContextMenu = ref(false)
+function closeContextMenu() {
+  showContextMenu.value = false
 }
 
-// const isPens = ref(false)
-// const ctxMenu = ref()
-// let activePens = []
+const hasLocked = ref(false)
+const hasLockedFile = ref(false) // 是否锁定整张图纸
+function setLockedState() {
+  if (!meta2d) return
 
-// const menuPos = reactive({
-//   top: -9999,
-//   left: -9999,
-//   visible: false,
-// })
+  const pens = selections.pens || []
+  if (!pens.length) {
+    const locked = meta2d.data().locked || 0
+    hasLockedFile.value = locked > 0
+    return
+  }
 
-// const calcMenuPos = computed(() => {
-//   return {
-//     top: `${menuPos.top}px`,
-//     left: `${menuPos.left}px`,
-//     visible: menuPos.visible ? 'visible' : 'hidden',
-//   }
-// })
+  // 只有所有选中的都为锁定状态，才显示已锁定，存在部分锁定的情况则默认为未锁定
+  hasLocked.value = pens.map(pen => pen.locked || 0).filter(i => i > 0).length === pens.length
+}
 
-// const eventBus = useEventbus()
-// eventBus.customOn('load', () => {
-//   window.addEventListener('contextmenu', (e) => {
-//     e.preventDefault()
-//     ctxMenu.value.focus()
-//   })
-//   meta2d.on('contextmenu', ({ e }) => {
-//     menuPos.top = e.clientY
-//     menuPos.left = e.clientX
-//     menuPos.visible = true
-//     ctxMenu.value.focus()
-//   })
-//   meta2d.on('active', (pens) => {
-//     if (pens.length > 0) {
-//       activePens = reactive(pens)
-//       isPens.value = true
-//     } else {
-//       isPens.value = false
-//       activePens = []
-//     }
-//   })
-//   meta2d.on('inactive', () => {
-//     isPens.value = false
-//   })
-// })
+const isViewMounted = inject('isViewMounted') as Ref<boolean>
+onMounted(async () => {
+  await until(isViewMounted)
+  setLockedState()
+})
+
+const showCombine = computed(() => isPens.value)
+const showUncombine = computed(() => {
+  if (!hasPen.value) return false
+  if (isPens.value) return false
+
+  const pen = selections.pen
+  if (!pen?.children?.length) return false
+  return true
+})
+
+function remove() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  const pens = selections.pens
+  if (!pens?.length) return
+
+  const hasLockedPen = pens.map(pen => pen.locked || 0).filter(i => i > 0).length
+  if (!hasLockedPen) {
+    meta2d.delete(pens as Pen[])
+    return
+  }
+
+  useConfirm({
+    title: '提示',
+    content: '当前选中存在锁定图元，确定要删除吗？',
+    ok() {
+      meta2d.delete(pens as Pen[], true)
+    },
+  })
+}
 
 function redo() {
+  closeContextMenu()
+
   if (!meta2d) return
   meta2d.redo()
 }
 
 function undo() {
+  closeContextMenu()
+
   if (!meta2d) return
   meta2d.undo()
 }
 
 function lock() {
-  meta2d.lock(2)
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value) return
+
+  // 将所有选中的图元锁定
+  const pens = selections.pens || []
+  pens.forEach((pen) => {
+    meta2d.setValue({
+      id: pen?.id,
+      locked: 2,
+    })
+  })
+  hasLocked.value = true
+  meta2d.render()
+}
+
+function unlock() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value) return
+
+  // 将所有选中的图元解锁
+  const pens = selections.pens || []
+  pens.forEach((pen) => {
+    meta2d.setValue({
+      id: pen?.id,
+      locked: 0,
+    })
+  })
+  hasLocked.value = false
+  meta2d.render()
+}
+
+function lockFile() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (hasPen.value) return
+  // 没有选中则锁定整张图纸
+  useConfirm({
+    title: '提示',
+    content: '确定要将整张图纸锁定吗？',
+    ok() {
+      meta2d.lock(2)
+      hasLockedFile.value = true
+    },
+  })
+}
+
+function unlockFile() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (hasPen.value) return
+  // 没有选中则锁定整张图纸
+  useConfirm({
+    title: '提示',
+    content: '确定要将整张图纸解锁吗？',
+    ok() {
+      meta2d.lock(0)
+      hasLockedFile.value = false
+    },
+  })
 }
 
 function combine() {
+  closeContextMenu()
 
+  if (!meta2d) return
+  if (!isPens.value) return
+
+  meta2d.combine(selections.pens as Pen[])
+}
+
+function uncombine() {
+  closeContextMenu()
+
+  if (!meta2d) return
+  const pen = selections.pen
+  if (!pen?.children?.length) return
+  meta2d.uncombine(pen as Pen)
 }
 
 function cut() {
-  meta2d.cut()
+  closeContextMenu()
+
+  if (!meta2d) return
+  if (!hasPen.value) {
+    meta2d.cut()
+    return
+  }
+  meta2d.cut(selections.pens as Pen[])
 }
 
 function copy() {
+  closeContextMenu()
 
+  if (!meta2d) return
+  if (!hasPen.value) {
+    meta2d.copy()
+    return
+  }
+  meta2d.copy(selections.pens as Pen[])
 }
 
 function paste() {
+  closeContextMenu()
 
+  if (!meta2d) return
+  meta2d.paste()
 }
 </script>
 
 <template>
-  <a-dropdown trigger="contextMenu" align-point w-180px :popup-max-height="350">
+  <a-trigger v-model:popup-visible="showContextMenu" trigger="contextMenu" align-point @popup-visible-change="setLockedState">
     <slot />
     <template #content>
-      <a-doption>置顶</a-doption>
-      <a-doption>置底</a-doption>
-      <a-doption>上一个图层</a-doption>
-      <a-doption>下一个图层</a-doption>
+      <div w-160px bg="[var(--color-bg-popup)]" border="1 base" py-2px shadow-lg>
+        <a-doption>置顶</a-doption>
+        <a-doption>置底</a-doption>
+        <a-doption>上一个图层</a-doption>
+        <a-doption>下一个图层</a-doption>
 
-      <div my-2px border-t-1 border-base />
+        <div my-2px border-t-1 border-base />
 
-      <a-doption>锁定</a-doption>
-      <a-doption>组合 / 取消组合</a-doption>
+        <a-doption v-if="!hasLockedFile && !hasPen" @click.prevent="lockFile">
+          锁定图纸
+        </a-doption>
+        <a-doption v-if="hasLockedFile && !hasPen" @click.prevent="unlockFile">
+          取消锁定图纸
+        </a-doption>
+        <a-doption v-if="!hasLocked && hasPen" :disabled="hasLockedFile" @click.prevent="lock">
+          锁定
+        </a-doption>
+        <a-doption v-if="hasLocked && hasPen" :disabled="hasLockedFile" @click.prevent="unlock">
+          取消锁定
+        </a-doption>
+        <a-doption v-if="showCombine" @click="combine">
+          组合
+        </a-doption>
+        <a-doption v-if="showUncombine" @click="uncombine">
+          取消组合
+        </a-doption>
 
-      <div my-2px border-t-1 border-base />
+        <div my-2px border-t-1 border-base />
 
-      <a-doption>删除</a-doption>
+        <a-doption :disabled="!hasPen" @click="remove">
+          删除
+        </a-doption>
 
-      <div my-2px border-t-1 border-base />
+        <div my-2px border-t-1 border-base />
 
-      <a-doption :style="{ width: '100%' }">
-        <div w-full flex-y-center justify-between>
-          <div>撤销</div>
-          <div>Ctrl + Z</div>
-        </div>
-      </a-doption>
-      <a-doption>
-        <div flex-y-center justify-between>
-          <div>重做</div>
-          <div>Shift + Z</div>
-        </div>
-      </a-doption>
+        <a-doption @click="undo">
+          <div w-full flex-y-center justify-between>
+            <div>撤销</div>
+            <div>Ctrl + Z</div>
+          </div>
+        </a-doption>
+        <a-doption @click="redo">
+          <div flex-y-center justify-between>
+            <div>重做</div>
+            <div>Shift + Z</div>
+          </div>
+        </a-doption>
 
-      <div my-2px border-t-1 border-base />
+        <div my-2px border-t-1 border-base />
 
-      <a-doption>
-        <div flex-y-center justify-between>
-          <div>剪切</div>
-          <div>Ctrl + X</div>
-        </div>
-      </a-doption>
-      <a-doption>
-        <div flex-y-center justify-between>
-          <div>复制</div>
-          <div>Ctrl + C</div>
-        </div>
-      </a-doption>
-      <a-doption>
-        <div flex-y-center justify-between>
-          <div>粘贴</div>
-          <div>Ctrl + V</div>
-        </div>
-      </a-doption>
+        <a-doption @click="cut">
+          <div flex-y-center justify-between>
+            <div>剪切</div>
+            <div>Ctrl + X</div>
+          </div>
+        </a-doption>
+        <a-doption @click="copy">
+          <div flex-y-center justify-between>
+            <div>复制</div>
+            <div>Ctrl + C</div>
+          </div>
+        </a-doption>
+        <a-doption @click="paste">
+          <div flex-y-center justify-between>
+            <div>粘贴</div>
+            <div>Ctrl + V</div>
+          </div>
+        </a-doption>
+      </div>
     </template>
-  </a-dropdown>
+  </a-trigger>
 </template>
 
 <style scoped>

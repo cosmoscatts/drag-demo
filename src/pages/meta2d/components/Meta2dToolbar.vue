@@ -74,6 +74,7 @@ function checkoutFileProps() {
   refShowProps.value?.justShowProps?.()
   selections.mode = SelectionMode.File
   selections.pen = undefined
+  selections.pens = []
 }
 
 function save() {

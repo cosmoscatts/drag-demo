@@ -76,8 +76,8 @@ onMounted(getPen)
       </a-form-item>
       <!-- <a-form-item label="颜色" name="color">
         <a-color-picker v-model="form.color" w-full @change="changeValue('color')" />
-      </a-form-item> -->
-      <!-- <a-form-item label="背景" name="background">
+      </a-form-item>
+      <a-form-item label="背景" name="background">
         <a-color-picker v-model="form.background" w-full @change="changeValue('background')" />
       </a-form-item> -->
       <a-form-item label="线条" name="dash">

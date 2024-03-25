@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import Layouts from 'vite-plugin-vue-layouts'
 import Unocss from 'unocss/vite'
-import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+// import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   base: './',
@@ -18,7 +18,7 @@ export default defineConfig({
   plugins: [
     Vue(),
     AutoImport({
-      resolvers: [ArcoResolver()],
+      // resolvers: [ArcoResolver()],
       imports: [
         'vue',
         'vue-router',
@@ -36,7 +36,7 @@ export default defineConfig({
       vueTemplate: true,
     }),
     Components({
-      resolvers: [ArcoResolver({ sideEffect: true })],
+      // resolvers: [ArcoResolver({ sideEffect: true })],
       dts: 'src/components.d.ts',
     }),
     Icons({

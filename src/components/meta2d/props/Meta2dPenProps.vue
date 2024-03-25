@@ -11,7 +11,13 @@ const form = reactive<any>({
   height: 0,
   //
   text: '',
-  color: '',
+  color: '', // 边框颜色
+  textColor: '', // 文字颜色
+  fontFamily: '', // 文字字体
+  fontSize: 12, // 文字大小
+  lineHeight: 1.5, // 文字行高
+  fontWeight: '',
+  fontStyle: '', // 是否倾斜
   background: '',
   dash: 0,
   borderRadius: 0,
@@ -26,6 +32,12 @@ function getPen() {
   form.id = pen.id || ''
   form.text = pen.text || ''
   form.color = pen.color || ''
+  form.textColor = pen.textColor || '' // 文字颜色
+  form.fontFamily = pen.fontFamily || '' // 文字字体
+  form.fontSize = pen.fontSize || 12 // 文字大小
+  form.lineHeight = pen.lineHeight || 1.5 // 文字行高
+  form.fontWeight = pen.fontWeight || ''
+  form.fontStyle = pen.fontStyle || '' // 是否倾斜
   form.background = pen.background || ''
   form.dash = (pen as any).dash || 0
   form.borderRadius = pen.borderRadius || 0
@@ -85,15 +97,12 @@ onMounted(() => {
       <h5 mb-4 font-bold>
         图元
       </h5>
-      <a-form-item label="文本" name="text">
-        <a-input v-model="form.text" @change="changeValue('text')" />
-      </a-form-item>
-      <!-- <a-form-item label="颜色" name="color">
-        <a-color-picker v-model="form.color" w-full @change="changeValue('color')" />
+      <a-form-item label="边框颜色" name="color">
+        <CommonColorPicker v-model="form.color" w-full @change="changeValue('color')" />
       </a-form-item>
       <a-form-item label="背景" name="background">
-        <a-color-picker v-model="form.background" w-full @change="changeValue('background')" />
-      </a-form-item> -->
+        <CommonColorPicker v-model="form.background" w-full @change="changeValue('background')" />
+      </a-form-item>
       <a-form-item label="线条" name="dash">
         <a-select v-model="form.dash" @change="changeValue('dash')">
           <a-option :key="0" :value="0" label="实线" />
@@ -136,6 +145,41 @@ onMounted(() => {
 
       <a-divider />
 
+      <a-form-item label="文本内容" name="text">
+        <a-input v-model="form.text" @change="changeValue('text')" />
+      </a-form-item>
+      <a-form-item label="文本颜色" name="textColor">
+        <CommonColorPicker v-model="form.textColor" w-full @change="changeValue('textColor')" />
+      </a-form-item>
+      <a-form-item label="文字字体" name="fontFamily">
+        <a-select v-model="form.fontFamily" @change="changeValue('fontFamily')">
+          <a-option key="normal" value="" label="默认" />
+          <a-option key="微软雅黑" value="微软雅黑" label="微软雅黑" />
+          <a-option key="宋体" value="宋体" label="宋体" />
+          <a-option key="黑体" value="黑体" label="黑体" />
+          <a-option key="楷体" value="楷体" label="楷体" />
+          <a-option key="fangsong" value="fangsong" label="仿宋" />
+        </a-select>
+      </a-form-item>
+      <a-form-item label="文字大小" name="fontSize">
+        <a-input-number v-model="form.fontSize" hide-button @change="changeValue('fontSize')">
+          <template #suffix>
+            px
+          </template>
+        </a-input-number>
+      </a-form-item>
+      <a-form-item label="加粗" name="fontWeight">
+        <a-select v-model="form.fontWeight" @change="changeValue('fontWeight')">
+          <a-option key="nornal" value="" label="正常" />
+          <a-option key="italic" value="bold" label="加粗" />
+        </a-select>
+      </a-form-item>
+      <a-form-item label="倾斜" name="fontStyle">
+        <a-select v-model="form.fontStyle" @change="changeValue('fontStyle')">
+          <a-option key="nornal" value="" label="正常" />
+          <a-option key="italic" value="italic" label="倾斜" />
+        </a-select>
+      </a-form-item>
       <a-form-item label="文字水平" name="textAlign">
         <a-select v-model="form.textAlign" @change="changeValue('textAlign')">
           <a-option key="left" value="left" label="左对齐" />

@@ -111,6 +111,7 @@ declare module 'vue' {
     Meta2dFileDropdown: typeof import('./components/meta2d/toolbar/Meta2dFileDropdown.vue')['default']
     Meta2dFileProps: typeof import('./components/meta2d/props/Meta2dFileProps.vue')['default']
     Meta2dFromArrowDropdown: typeof import('./components/meta2d/toolbar/Meta2dFromArrowDropdown.vue')['default']
+    Meta2dImageUpload: typeof import('./components/meta2d/Meta2dImageUpload.vue')['default']
     Meta2dLine: typeof import('./components/meta2d/toolbar/Meta2dLine.vue')['default']
     Meta2dLineTypeDropdown: typeof import('./components/meta2d/toolbar/Meta2dLineTypeDropdown.vue')['default']
     Meta2dMagnifier: typeof import('./components/meta2d/toolbar/Meta2dMagnifier.vue')['default']

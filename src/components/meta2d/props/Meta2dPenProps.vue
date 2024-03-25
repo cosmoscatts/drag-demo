@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Pen } from '@meta2d/core'
+import type { FileItem } from '@arco-design/web-vue/es/upload/interfaces'
 
 const { selections } = useMeta2dSelection()
 
@@ -24,6 +25,15 @@ const form = reactive<any>({
   globalAlpha: 1,
   textAlign: '',
   textBaseline: '',
+  image: '', // 图片
+})
+
+// 特定基础类型可以添加背景图片
+const canAddBgImageNames = ['square', 'rectangle', 'circle', 'triangle', 'diamond', 'pentagon', 'hexagon', 'pentagram']
+const showAddBgImage = computed(() => {
+  const pen = selections.pen
+  if (!pen || !pen.name?.length) return false
+  return canAddBgImageNames.includes(pen.name)
 })
 
 function getPen() {
@@ -52,6 +62,10 @@ function getPen() {
     form.width = rect.width || 0
     form.height = rect.height || 0
   }
+
+  if (showAddBgImage.value) {
+    form.image = pen.image || ''
+  }
 }
 
 // 监听选中不同图元
@@ -72,6 +86,25 @@ function changeRect(prop: string) {
   const v: any = { id: form.id }
   v[prop] = form[prop]
   meta2d.setValue(v, { render: true })
+}
+
+async function onBgImageChange(_: FileItem[], currentFile: FileItem) {
+  const imageUrl = await getFileBase64(currentFile.file!)
+  form.image = imageUrl
+  changeValue('image')
+  Message.success('添加背景图片成功')
+}
+
+function removeBgImage() {
+  useConfirm({
+    title: '提示',
+    content: '确定要移除背景图片吗？',
+    ok() {
+      form.image = ''
+      changeValue('image')
+      Message.success('移除背景图片成功')
+    },
+  })
 }
 
 onMounted(() => {
@@ -126,6 +159,25 @@ onMounted(() => {
           :step="0.01"
           @change="changeValue('globalAlpha')"
         />
+      </a-form-item>
+      <a-form-item v-if="showAddBgImage" label="背景图片" name="image">
+        <a-avatar :size="100" shape="square" trigger-type="mask" border="1.5 [var(--color-neutral-5)] dashed">
+          <template #trigger-icon>
+            <a-upload
+              :auto-upload="false"
+              list-type="picture-card"
+              :show-file-list="false"
+              @change="onBgImageChange"
+              @before-upload="checkImageBeforeUpload"
+            >
+              <template #upload-button>
+                <IconCamera mr4 text-18px hover:text-primary />
+              </template>
+            </a-upload>
+            <IconDelete text-18px hover:text-primary @click="removeBgImage" />
+          </template>
+          <img v-show="form.image" :src="form.image" h-full w-full>
+        </a-avatar>
       </a-form-item>
 
       <a-divider />
@@ -200,3 +252,9 @@ onMounted(() => {
     </a-form>
   </div>
 </template>
+
+<style scoped>
+:deep(.arco-avatar) {
+  background-color: transparent!important;
+}
+</style>

@@ -34,14 +34,14 @@ export function toggleDark(event: MouseEvent) {
           clipPath: isDark.value
             ? [...clipPath].reverse()
             : clipPath,
-        },
+        } as any,
         {
           duration: 300,
           easing: 'ease-out',
           pseudoElement: isDark.value
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
-        },
+        } as any,
       )
     })
 }

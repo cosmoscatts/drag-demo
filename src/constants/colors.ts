@@ -30,3 +30,9 @@ export const defaultThemeColors: ThemeColor[] = colors.map(([prop, name, hex]) =
     rgb: `rgb(var(--${prop}-6))`,
   }
 })
+
+export function getPrimaryColorHex() {
+  const uiStore = useUiStore()
+  const primaryColor = uiStore.settings.primaryColor
+  return defaultThemeColors.find(i => i.prop === primaryColor)?.hex
+}

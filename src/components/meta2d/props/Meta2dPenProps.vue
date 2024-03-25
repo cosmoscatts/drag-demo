@@ -146,7 +146,7 @@ onMounted(() => {
       <a-divider />
 
       <a-form-item label="文本内容" name="text">
-        <a-input v-model="form.text" @change="changeValue('text')" />
+        <a-textarea v-model="form.text" @change="changeValue('text')" />
       </a-form-item>
       <a-form-item label="文本颜色" name="textColor">
         <CommonColorPicker v-model="form.textColor" w-full @change="changeValue('textColor')" />

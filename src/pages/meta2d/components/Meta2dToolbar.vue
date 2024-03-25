@@ -151,9 +151,6 @@ defineExpose({
 
       <Meta2dMagnifier />
 
-      <div>
-        快捷键
-      </div>
       <div cursor-pointer hover:text-primary @click="preview">
         预览
       </div>

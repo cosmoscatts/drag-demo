@@ -24,7 +24,7 @@ function readFile(file: Blob) {
 }
 
 function openFile() {
-// 1. 显示选择文件对话框
+  // 1. 显示选择文件对话框
   const input = document.createElement('input')
   input.type = 'file'
   input.onchange = async (event) => {
@@ -130,6 +130,50 @@ function exportSvg() {
   evt.initEvent('click', true, true)
   a.dispatchEvent(evt)
 }
+
+function openImageFile() {
+  // 1. 显示选择文件对话框
+  const input = document.createElement('input')
+  input.type = 'file'
+  input.onchange = async (event) => {
+    const elem = event.target as HTMLInputElement
+    if (!elem.files || !elem.files[0]) return
+    const file = elem.files[0]
+    const REGEX = /image/
+    if (!REGEX.test(file.type)) {
+      Message.error('请上传图片')
+      return
+    }
+
+    // 2. 读取图片内容
+    const imageUrl = await getFileBase64(file)
+    const image = new Image()
+    image.src = imageUrl
+    image.onload = () => {
+      const width = image.width
+      const height = image.height
+      // 进行缩放, 默认宽度 300
+      const radioWidth = 300
+      const radioHeight = radioWidth * height / width
+      try {
+        // 3. 打开图片
+        meta2d.canvas.addCaches = [
+          {
+            width: radioWidth,
+            height: radioHeight,
+            image: imageUrl,
+            name: 'image',
+            imageRatio: true,
+          },
+        ]
+        Message.success('上传成功，请点击图纸选择添加位置')
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+  input.click()
+}
 </script>
 
 <template>
@@ -162,6 +206,12 @@ function exportSvg() {
 
       <a-divider />
 
+      <a-doption @click="openImageFile">
+        <template #icon>
+          <div i-ri-import-line />
+        </template>
+        导入图片
+      </a-doption>
       <a-doption @click="exportPng">
         <template #icon>
           <div i-ri-image-2-line />

@@ -36,7 +36,6 @@ function clear() {
       Message.success('清空图纸成功')
     },
   })
-  meta2d.clear()
 }
 
 const scale = ref(0)
